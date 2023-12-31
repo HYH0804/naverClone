@@ -90,7 +90,7 @@
         }
         /*margin vs padding >> padding까지는 컨텐츠로 인식, margin은 아님 */
         #header-hamburger{
-            position: absolute;
+            position: absolute; /*absolute는 top bottom left right 속성값 추가로 지정 안하면 기준 위치에서의 context 가장 왼쪽 위에 위치*/
             top:18px;
             left:-10px;
             display:inline-block; /*버튼태그는 inline이라 높낮이 줄려면 해줘야함.block 요소에서 그 해당 구역만 차지하게 */
@@ -104,8 +104,8 @@
         #header-hamburger:hover::before{ /*hover상태에서 딱히 특정 속성에 대한 스타일을 별도지정 안했으면 hover상태가 아닌 기본상태의 값 사용 */
             position:absolute; /*before의 가상요소를 쓰는 이유는 가상요소 없이 그냥 :hover만 사용할 경우 #header-hamburger의 css가 #header-hamburger:hover css로 대체됨. 근데 우리는 지금 대체되는게 아니라 #header-hamburger는 그대로 냅두고 그 위에 border-radius 관련 스타일들만 추가로 보이길 원함. 그래서 hover일때만 보이는 새로운 요소를 만들면서 가상요소를 사용한거*/
             content: ''; /*가상요소는 기본적으로 inline이기에 content 속성에 맞춰 크기가 정해짐 == height와 width 못줌. 따라서 position:abosolute를 줌으로써 width와 height 지정 가능하게....*/
-            left: 1px;
-            top:1px;
+            left: 1px; /*이때 left,top,right,bottom의 기준은 padding+context 부분임. 즉 padding 있으면 그 끝 padding 기준으로 간격 측정*/
+            top:1px; 
             width: 44px;
             height: 44px;
             z-index: 0; /*z-index는 기본적으로 html이 늦게 써지는놈이 더 위로 오는데, 가상요소땜에 #header-hamburger:hover::before가 젤 위에 있음. 얘를 #header-hamburger > div보다 내려야되니까 z-index 조정*/
