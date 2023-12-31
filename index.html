@@ -100,14 +100,15 @@
             border: none; /*user agent stylesheet의 기본 background 없앰 */
             cursor: pointer; /*커서 올렸을때 손모양 바뀌는거*/
         }
+        /*before과 after의 가상요소는 자식으로 요소가 인식됨.*/
         #header-hamburger:hover::before{ /*hover상태에서 딱히 특정 속성에 대한 스타일을 별도지정 안했으면 hover상태가 아닌 기본상태의 값 사용 */
-            position:absolute;
-            content: '';
+            position:absolute; /*before의 가상요소를 쓰는 이유는 가상요소 없이 그냥 :hover만 사용할 경우 #header-hamburger의 css가 #header-hamburger:hover css로 대체됨. 근데 우리는 지금 대체되는게 아니라 #header-hamburger는 그대로 냅두고 그 위에 border-radius 관련 스타일들만 추가로 보이길 원함. 그래서 hover일때만 보이는 새로운 요소를 만들면서 가상요소를 사용한거*/
+            content: ''; /*가상요소는 기본적으로 inline이기에 content 속성에 맞춰 크기가 정해짐 == height와 width 못줌. 따라서 position:abosolute를 줌으로써 width와 height 지정 가능하게....*/
             left: 1px;
             top:1px;
             width: 44px;
             height: 44px;
-            z-index: 0;
+            z-index: 0; /*z-index는 기본적으로 html이 늦게 써지는놈이 더 위로 오는데, 가상요소땜에 #header-hamburger:hover::before가 젤 위에 있음. 얘를 #header-hamburger > div보다 내려야되니까 z-index 조정*/
             background-color: var(--color_option_bg);
             border-radius: 50%;
         }
@@ -119,7 +120,7 @@
             background-repeat: no-repeat; /*background는 기본적으로 그 사진이 무한반복됨.*/
             background-position: -326px -82px;
             position: relative;
-            z-index: 1;
+            z-index: 1; /*z-index 조정*/
         }
         #main {
             height: 2000px;
@@ -131,7 +132,9 @@
         <div id="wrap-center">
             <div id="header">
                 <button id="header-hamburger">
+                    <!-- ::before -->
                     <div></div>
+                    <!-- ::after -->
                 </button>
             </div>
             <div id="search"></div>

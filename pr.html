@@ -85,8 +85,6 @@
             position: absolute;
             top:18px;
             left:-10px;
-            width: 46px; /*width와 height는 padding 포함한 크기*/
-            height: 46px;
             padding: 10px;
             display: inline-block;
             background: none;
@@ -94,11 +92,13 @@
             cursor: pointer;
 
         }
-        #hamburger:hover{
+        #hamburger:hover::before{
+            position: absolute;
+            content: '';
             border-radius: 50%;
             background-color: var(--color_option_bg);
-            padding: 9px; /*padding을 조절해서 hover 안했을때의 기본값에서의 width와 height 조절*/
-
+            width: 44px;
+            height: 44px;
         }
         #hamburger > div {
             display: inline-block;
@@ -120,7 +120,9 @@
         <div id="wrap-center">
             <div id="header">
                 <button id="hamburger">
+                    <!-- ::before -->
                     <div></div>
+                    <!-- ::after -->
                 </button>
             </div>
             <div id="search"></div>
